@@ -1,0 +1,346 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ==========================================================================
+   INOVEXA LABS — DESIGN SYSTEM
+   Dark technology-lab aesthetic. Deep charcoal, off-white type,
+   one strong brand accent (Lab Lime) used only where it means something.
+   ========================================================================== */
+
+@theme {
+  /* --- Surfaces (darkest → lightest) --- */
+  --color-void: #05060a;
+  --color-carbon: #0a0c11;
+  --color-graphite: #101319;
+  --color-slate-panel: #161a21;
+  --color-steel: #232833;
+  --color-steel-bright: #333a48;
+
+  /* --- Type --- */
+  --color-bone: #f5f6f3;
+  --color-bone-dim: #b9bec7;
+  --color-ash: #7c8493;
+  --color-ash-deep: #545c6b;
+
+  /* --- Brand accent: Lab Lime. Signal, not decoration. --- */
+  --color-signal: #c4f24c;
+  --color-signal-dim: #9ec73a;
+  --color-signal-deep: #2a3510;
+
+  /* --- Instrument readouts / experiment telemetry --- */
+  --color-plasma: #63d2e8;
+  --color-ember: #f2b544;
+  --color-flux: #b088f9;
+
+  /* --- Product status language --- */
+  --color-status-idea: #8b9baa;
+  --color-status-experiment: #63d2e8;
+  --color-status-development: #f2b544;
+  --color-status-live: #7ee07a;
+  --color-status-archived: #545c6b;
+
+  /* --- Typography --- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* --- Motion --- */
+  --ease-lab: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Radius --- */
+  --radius-panel: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Base layer
+   -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-steel);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-void);
+  }
+
+  /* Visible, on-brand focus for keyboard users — never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-steel) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-steel);
+    border-radius: 999px;
+    border: 3px solid var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-steel-bright);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Component primitives
+   -------------------------------------------------------------------------- */
+@layer components {
+  /* The fine engineering grid that underlies the whole lab. */
+  .lab-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.028) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .lab-grid-fine {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.022) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Fades the grid out toward the edges so it never feels like wallpaper. */
+  .lab-grid-mask {
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+  }
+
+  .lab-vignette {
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -10%, rgb(196 242 76 / 0.075), transparent 62%),
+      radial-gradient(ellipse 45% 40% at 88% 8%, rgb(99 210 232 / 0.05), transparent 60%);
+  }
+
+  /* Fine hairline border with a subtle inner highlight — the "panel" look. */
+  .panel {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.035) 0%, rgb(255 255 255 / 0) 42%),
+      var(--color-carbon);
+    border: 1px solid var(--color-steel);
+    border-radius: var(--radius-panel);
+  }
+
+  .panel-interactive {
+    transition:
+      border-color 400ms var(--ease-lab),
+      transform 400ms var(--ease-lab),
+      background-color 400ms var(--ease-lab);
+  }
+  .panel-interactive:hover {
+    border-color: color-mix(in srgb, var(--color-signal) 42%, var(--color-steel));
+  }
+
+  /* Glass — used sparingly, only for floating chrome (header, lab signal). */
+  .lab-glass {
+    background-color: rgb(5 6 10 / 0.72);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+  }
+
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-steel) 12%,
+      var(--color-steel) 88%,
+      transparent
+    );
+  }
+
+  /* Display type scale — large, tight, engineering-grade. */
+  .display-xl {
+    font-size: clamp(2.5rem, 7.4vw, 5.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+    font-weight: 500;
+  }
+  .display-lg {
+    font-size: clamp(2rem, 4.6vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.032em;
+    font-weight: 500;
+  }
+  .display-md {
+    font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+    line-height: 1.12;
+    letter-spacing: -0.026em;
+    font-weight: 500;
+  }
+
+  .glow-signal {
+    box-shadow:
+      0 0 0 1px rgb(196 242 76 / 0.22),
+      0 0 34px -8px rgb(196 242 76 / 0.34);
+  }
+
+  .text-glow-signal {
+    text-shadow: 0 0 28px rgb(196 242 76 / 0.32);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+@utility edge-x {
+  padding-inline: 1.25rem;
+  @media (width >= 768px) {
+    padding-inline: 2.5rem;
+  }
+  @media (width >= 1280px) {
+    padding-inline: 3.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Motion — subtle, purposeful, and fully disabled under reduced-motion.
+   -------------------------------------------------------------------------- */
+@keyframes lab-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes lab-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.86);
+  }
+}
+
+@keyframes lab-dash {
+  to {
+    stroke-dashoffset: -64;
+  }
+}
+
+@keyframes lab-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lab-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* Above-the-fold entrance. Pure CSS so the hero is never blocked on JS. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: hero-rise 900ms var(--ease-lab) both;
+}
+
+/* Elements tagged with data-reveal animate in when observed. */
+[data-reveal] {
+  opacity: 0;
+}
+[data-reveal="in"] {
+  animation: lab-reveal 760ms var(--ease-lab) both;
+}
+
+.animate-pulse-dot {
+  animation: lab-pulse 2.4s ease-in-out infinite;
+}
+.animate-lab-dash {
+  stroke-dasharray: 4 6;
+  animation: lab-dash 2.4s linear infinite;
+}
+.animate-lab-orbit {
+  animation: lab-orbit 42s linear infinite;
+}
+.animate-lab-sweep {
+  animation: lab-sweep 3.4s var(--ease-lab) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+  }
+  .hero-in {
+    opacity: 1;
+  }
+}
