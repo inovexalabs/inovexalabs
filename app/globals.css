@@ -8,7 +8,7 @@
  *    (bg-navy-950, text-h2, rounded-xl, shadow-glow-purple, py-section ...).
  * 2. Semantic, tone-aware tokens (--fg, --surface, --line ...) are plain CSS
  *    variables. A section switches palette by setting data-tone="dark" — every
- *    component inside adapts without extra props.
+ *    component inside adapts withoubt extra props.
  * 3. `@theme inline` maps the semantic variables to utilities (text-fg,
  *    bg-surface, border-line ...).
  */
