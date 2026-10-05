@@ -48,7 +48,6 @@ export async function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
             <Logo
-              gradientId="footer-logo-mark"
               logoUrl={settings?.logo_path ? mediaUrl(settings.logo_path) : null}
               siteName={settings?.site_name}
             />

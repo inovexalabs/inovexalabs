@@ -13,9 +13,10 @@ import { getSiteSettings } from "@/lib/supabase/queries/settings";
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await getSiteSettings();
   return buildMetadata({
-    title: "Contact",
+    title: "Contact Inovexa Labs | Start a Technology Project",
+    absoluteTitle: true,
     description:
-      "Tell us what you are building. Inovexa Labs replies to every enquiry within two working days with next steps.",
+      "Have a software, AI, automation, or technology idea? Contact Inovexa Labs to discuss your project and explore how we can build it.",
     path: ROUTES.contact,
     siteName: settings?.site_name,
   });

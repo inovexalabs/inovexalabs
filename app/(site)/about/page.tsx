@@ -22,9 +22,10 @@ import { getTechnologyGroups } from "@/lib/supabase/queries/technologies";
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await getSiteSettings();
   return buildMetadata({
-    title: "About",
+    title: "About Inovexa Labs | Software & Technology Innovation Studio",
+    absoluteTitle: true,
     description:
-      "Inovexa Labs is a product-focused technology studio working across software, AI, cybersecurity and automation — building technology that solves real problems.",
+      "Learn about Inovexa Labs, a technology studio focused on software development, AI, cybersecurity, digital products, and experimental technology.",
     path: ROUTES.about,
     siteName: settings?.site_name,
   });

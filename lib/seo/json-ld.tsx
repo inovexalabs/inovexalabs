@@ -1,3 +1,4 @@
+import { BRAND_ASSETS } from "@/lib/constants/brand";
 import { env } from "@/lib/env";
 
 type JsonLdObject = Record<string, unknown>;
@@ -5,6 +6,11 @@ type JsonLdObject = Record<string, unknown>;
 /** Absolute URL for a site path, for structured data and canonical references. */
 export function absoluteUrl(path: string): string {
   return new URL(path, env.NEXT_PUBLIC_SITE_URL).toString();
+}
+
+/** The logo uploaded in /admin/settings, or the built-in lockup, as an absolute ImageObject. */
+function logoImageObject(logoUrl: string | null | undefined): JsonLdObject {
+  return { "@type": "ImageObject", url: logoUrl || absoluteUrl(BRAND_ASSETS.logo) };
 }
 
 /** Renders schema.org data. `<` is escaped so content can never close the script tag. */
@@ -74,6 +80,7 @@ export function articleJsonLd(article: {
   updatedAt: string;
   authorName: string;
   publisherName: string;
+  publisherLogoUrl?: string | null;
 }): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -89,6 +96,7 @@ export function articleJsonLd(article: {
       "@type": "Organization",
       name: article.publisherName,
       url: absoluteUrl("/"),
+      logo: logoImageObject(article.publisherLogoUrl),
     },
     mainEntityOfPage: absoluteUrl(article.path),
   };
@@ -102,6 +110,7 @@ export function organizationJsonLd(organization: {
   phone: string | null;
   address: string | null;
   socialLinks: Partial<Record<string, string>>;
+  logoUrl?: string | null;
 }): JsonLdObject {
   const sameAs = Object.values(organization.socialLinks).filter((url): url is string => Boolean(url));
   return {
@@ -109,6 +118,7 @@ export function organizationJsonLd(organization: {
     "@type": "Organization",
     name: organization.name,
     url: absoluteUrl("/"),
+    logo: logoImageObject(organization.logoUrl),
     ...(organization.description ? { description: organization.description } : {}),
     ...(organization.email ? { email: organization.email } : {}),
     ...(organization.phone ? { telephone: organization.phone } : {}),

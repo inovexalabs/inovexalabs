@@ -20,9 +20,9 @@ interface ProjectsPageProps {
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await getSiteSettings();
   return buildMetadata({
-    title: "Projects",
+    title: "Software Projects & Products",
     description:
-      "Selected work from Inovexa Labs: web platforms, mobile apps, AI systems, automation and security projects built for real teams.",
+      "Explore software products, digital platforms, AI systems, and technology projects built and researched by Inovexa Labs.",
     path: ROUTES.projects,
     siteName: settings?.site_name,
   });

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BRAND_ASSETS } from "@/lib/constants/brand";
 
 interface BuildMetadataOptions {
   title: string;
@@ -10,7 +11,10 @@ interface BuildMetadataOptions {
   siteName?: string;
 }
 
-/** Consistent title, description, canonical, Open Graph and Twitter tags for every page. */
+/**
+ * Consistent title, description, canonical, Open Graph and Twitter tags for every page.
+ * The branded share card is the default image; pages with their own cover replace it.
+ */
 export function buildMetadata({
   title,
   description,
@@ -19,6 +23,7 @@ export function buildMetadata({
   siteName = "Inovexa Labs",
 }: BuildMetadataOptions): Metadata {
   const desc = description ?? undefined;
+  const images = [{ ...BRAND_ASSETS.ogImage, alt: `${siteName} logo: Innovate. Code. Build.` }];
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -31,11 +36,13 @@ export function buildMetadata({
       title,
       description: desc,
       locale: "en_US",
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: desc,
+      images,
     },
   };
 }

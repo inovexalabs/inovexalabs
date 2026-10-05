@@ -20,9 +20,9 @@ interface BlogPageProps {
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await getSiteSettings();
   return buildMetadata({
-    title: "Insights",
+    title: "Technology & Engineering Blog",
     description:
-      "Articles from Inovexa Labs on engineering, AI, security and automation — notes from the work, written by the people doing it.",
+      "Practical articles about software development, AI, cybersecurity, cloud technology, Web3, automation, and modern engineering.",
     path: ROUTES.blog,
     siteName: settings?.site_name,
   });

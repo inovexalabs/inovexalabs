@@ -148,14 +148,14 @@ export function SettingsForm({ defaultValues, logoUrl, faviconUrl }: SettingsFor
             <FormSection
               id="branding"
               title="Branding"
-              description="Leave either one empty to use the built-in Inovexa mark."
+              description="Leave either one empty to use the built-in Inovexa Labs logo and mark."
             >
               <div>
                 <p id="logo-label" className="text-sm font-medium text-fg">
                   Logo
                 </p>
                 <p className="mt-1 text-sm text-fg-muted">
-                  Replaces the mark and name in the header and footer. The company name above is used as its alt text.
+                  Replaces the Inovexa Labs logo in the header, footer and admin. The company name above is used as its alt text.
                 </p>
                 <div className="mt-3" role="group" aria-labelledby="logo-label">
                   <ImageField

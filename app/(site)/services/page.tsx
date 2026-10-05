@@ -11,13 +11,14 @@ import { getServiceSummaries } from "@/lib/supabase/queries/services";
 import { getSiteSettings } from "@/lib/supabase/queries/settings";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [{ data: services }, { data: settings }] = await Promise.all([getServiceSummaries(), getSiteSettings()]);
-  const siteName = settings?.site_name ?? "Inovexa Labs";
-  const titles = services?.map((service) => service.title) ?? [];
-  const description =
-    titles.length > 0 ? `${siteName} services: ${titles.join(", ")}.`.slice(0, 170) : settings?.studio_statement;
-
-  return buildMetadata({ title: "Services", description, path: ROUTES.services, siteName });
+  const { data: settings } = await getSiteSettings();
+  return buildMetadata({
+    title: "Software Development & Technology Services",
+    description:
+      "Custom software, web and mobile development, AI engineering, automation, cybersecurity, cloud infrastructure, and technology solutions from Inovexa Labs.",
+    path: ROUTES.services,
+    siteName: settings?.site_name,
+  });
 }
 
 export default async function ServicesPage() {

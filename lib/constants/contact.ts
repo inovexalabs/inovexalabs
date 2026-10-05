@@ -14,7 +14,14 @@ export const PROJECT_TYPES = [
   "Other",
 ] as const;
 
-export const BUDGET_RANGES = ["Under $1,000", "$1,000–$5,000", "$5,000–$10,000", "$10,000+", "Not Sure"] as const;
+/** Nepali rupees, in lakh (1 lakh = Rs. 1,00,000) as clients in Nepal quote budgets. */
+export const BUDGET_RANGES = [
+  "Under Rs. 1 lakh",
+  "Rs. 1–5 lakh",
+  "Rs. 5–15 lakh",
+  "Rs. 15 lakh+",
+  "Not Sure",
+] as const;
 
 export const TIMELINES = ["ASAP", "1–3 months", "3–6 months", "6+ months", "Flexible"] as const;
 

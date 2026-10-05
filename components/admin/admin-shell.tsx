@@ -47,7 +47,7 @@ export function AdminShell({ session, brand, children }: AdminShellProps) {
 
       <aside className="sticky top-0 hidden h-dvh flex-col border-r border-line bg-surface px-4 py-6 lg:flex">
         <div className="px-2">
-          <Logo gradientId="admin-logo-mark" logoUrl={brand.logoUrl} siteName={brand.siteName} />
+          <Logo logoUrl={brand.logoUrl} siteName={brand.siteName} />
           <p className="mt-2 text-xs font-medium text-fg-muted">Content admin</p>
         </div>
         <div className="mt-8 flex-1">
@@ -63,7 +63,7 @@ export function AdminShell({ session, brand, children }: AdminShellProps) {
       <div className="min-w-0">
         <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur lg:hidden">
           <div className="flex h-14 items-center justify-between gap-3 px-gutter">
-            <Logo gradientId="admin-logo-mark-mobile" logoUrl={brand.logoUrl} siteName={brand.siteName} />
+            <Logo logoUrl={brand.logoUrl} siteName={brand.siteName} />
             <SignOutButton />
           </div>
           <div className="flex items-center gap-2 border-t border-line px-gutter py-2">

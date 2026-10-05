@@ -21,9 +21,10 @@ interface InnovationPageProps {
 export async function generateMetadata(): Promise<Metadata> {
   const { data: settings } = await getSiteSettings();
   return buildMetadata({
-    title: "Innovation Lab",
+    title: "Innovation Lab | AI, Cybersecurity & Emerging Technology",
+    absoluteTitle: true,
     description:
-      "Internal experiments, prototypes and research from the Inovexa Labs: AI, cybersecurity, Web3, automation and developer tools.",
+      "Explore Inovexa Labs' experiments and research in AI agents, cybersecurity, Web3, automation, developer tools, and emerging technology.",
     path: ROUTES.innovation,
     siteName: settings?.site_name,
   });

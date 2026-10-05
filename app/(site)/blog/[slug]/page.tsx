@@ -18,6 +18,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { getAdjacentPosts, getPostBySlug, getPostSlugs, getRelatedPosts } from "@/lib/supabase/queries/blog";
 import { getSiteSettings } from "@/lib/supabase/queries/settings";
 import { formatDate } from "@/lib/utils/format";
+import { mediaUrl } from "@/lib/utils/storage-url";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -75,6 +76,7 @@ export default async function PostPage({ params }: PostPageProps) {
           updatedAt: post.updatedAt,
           authorName: post.author ?? (settings?.site_name ?? "Inovexa Labs"),
           publisherName: settings?.site_name ?? "Inovexa Labs",
+          publisherLogoUrl: settings?.logo_path ? mediaUrl(settings.logo_path) : null,
         })}
       />
 

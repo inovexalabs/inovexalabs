@@ -27,7 +27,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       <div className="w-full max-w-sm">
         <div className="flex justify-center">
           <Logo
-            gradientId="login-logo-mark"
             logoUrl={settings?.logo_path ? mediaUrl(settings.logo_path) : null}
             siteName={settings?.site_name}
           />

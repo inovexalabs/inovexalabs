@@ -184,7 +184,7 @@ export function HeroVisual({ services }: HeroVisualProps) {
         <span className="absolute inset-0 animate-halo rounded-full border border-electric-500/40 [animation-delay:1.8s]" />
         <span className="relative grid size-full place-items-center rounded-full bg-surface shadow-[0_0_0_1px_rgb(115_87_217/0.18),0_18px_40px_-12px_rgb(115_87_217/0.55)]">
           <span className="absolute inset-[9%] rounded-full brand-gradient-soft" />
-          <LogoMark className="relative w-[48%]" gradientId="hero-core-mark" />
+          <LogoMark className="relative w-[52%]" />
         </span>
       </motion.div>
 

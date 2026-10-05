@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/layout/skip-link";
 import { JsonLd, organizationJsonLd, webSiteJsonLd } from "@/lib/seo/json-ld";
 import { getSiteSettings, parseSocialLinks } from "@/lib/supabase/queries/settings";
+import { mediaUrl } from "@/lib/utils/storage-url";
 
 export default async function SiteLayout({ children }: { children: ReactNode }) {
   // One cached settings read powers structured data and the analytics flag.
@@ -20,6 +21,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
           phone: settings.contact_phone,
           address: settings.contact_address,
           socialLinks: parseSocialLinks(settings.social_links),
+          logoUrl: settings.logo_path ? mediaUrl(settings.logo_path) : null,
         }),
         webSiteJsonLd(settings.site_name),
       ]
